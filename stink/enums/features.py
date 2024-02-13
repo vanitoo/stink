@@ -16,4 +16,5 @@ class Features(Enum):
     filezilla = "Filezilla"
     wallets = "Wallets"
     steam = "Steam"
+    wifi = "Wifi"    
     all = "All"

